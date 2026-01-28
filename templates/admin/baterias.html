@@ -1,0 +1,58 @@
+{% extends "admin/base_admin.html" %}
+
+{% block subtitle %}Gerenciar Baterias{% endblock %}
+
+{% block content %}
+<div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8">
+    <h4 class="font-bold mb-4 text-slate-700">Cadastrar Nova Bateria</h4>
+    <form action="{{ url_for('admin.list_batteries') }}" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 items-end">
+        <div>
+            <label class="block text-xs font-medium text-slate-500 mb-1 uppercase">Marca</label>
+            <input type="text" name="brand" placeholder="Ex: Moura" class="w-full p-2 border rounded-lg" required>
+        </div>
+        <div>
+            <label class="block text-xs font-medium text-slate-500 mb-1 uppercase">Amperagem (Ah)</label>
+            <input type="number" name="amps" placeholder="60" class="w-full p-2 border rounded-lg" required>
+        </div>
+        <div>
+            <label class="block text-xs font-medium text-slate-500 mb-1 uppercase">Preço Troca (R$)</label>
+            <input type="number" step="0.01" name="price" placeholder="200.00" class="w-full p-2 border rounded-lg" required>
+        </div>
+        <div>
+            <label class="block text-xs font-medium text-slate-500 mb-1 uppercase">Foto</label>
+            <input type="file" name="image" accept="image/*" class="w-full text-sm text-slate-500 border rounded-lg p-1">
+        </div>
+        <div class="lg:col-span-4 flex justify-end gap-4">
+             <input type="number" name="old_price" placeholder="Preço Novo (R$)" class="p-2 border rounded-lg w-32">
+             <input type="number" name="stock_quantity" placeholder="Estoque" class="p-2 border rounded-lg w-24">
+             <button type="submit" class="bg-blue-600 text-white px-8 py-2 rounded-lg font-bold hover:bg-blue-700 transition">Salvar</button>
+        </div>
+    </form>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    <table class="w-full text-left">
+        <thead class="bg-slate-50 text-slate-500 text-xs uppercase">
+            <tr>
+                <th class="p-4 text-center">Foto</th>
+                <th class="p-4">Marca/Amperagem</th>
+                <th class="p-4 text-right">Ações</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+            {% for b in batteries %}
+            <tr>
+                <td class="p-4 text-center">
+                    <img src="{{ url_for('static', filename='uploads/products/' + b.image_url) }}" class="w-12 h-12 object-cover rounded shadow-sm mx-auto">
+                </td>
+                <td class="p-4 font-bold text-slate-700">{{ b.brand }} {{ b.amps }}Ah</td>
+                <td class="p-4 text-right space-x-3">
+                    <a href="{{ url_for('admin.edit_battery', id=b.id) }}" class="text-blue-600 hover:underline">Editar</a>
+                    <a href="{{ url_for('admin.delete_battery', id=b.id) }}" class="text-red-600 hover:underline" onclick="return confirm('Excluir?')">Excluir</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

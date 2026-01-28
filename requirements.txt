@@ -1,0 +1,14 @@
+# Web Framework
+Flask==3.0.0
+
+# Banco de Dados (PostgreSQL)
+Flask-SQLAlchemy
+psycopg2-binary
+# Pagamentos
+stripe==7.11.0
+
+# Variáveis de Ambiente e Segurança
+python-dotenv==1.0.0
+
+# Servidor de Produção (Recomendado para quando o site for ao ar)
+gunicorn==21.2.0

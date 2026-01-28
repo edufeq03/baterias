@@ -1,0 +1,48 @@
+{% extends "admin/base_admin.html" %}
+
+{% block subtitle %}Visão Geral{% endblock %}
+
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <p class="text-slate-500 text-sm">Vendas (Mês)</p>
+        <h3 class="text-2xl font-bold text-slate-800">R$ 12.450,00</h3>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <p class="text-slate-500 text-sm">Sucatas em Estoque</p>
+        <h3 class="text-2xl font-bold text-blue-600">45 unidades</h3>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <p class="text-slate-500 text-sm">Assinantes Clube</p>
+        <h3 class="text-2xl font-bold text-orange-500">12 Ativos</h3>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <p class="text-slate-500 text-sm">Pedidos Pendentes</p>
+        <h3 class="text-2xl font-bold text-red-500">3 Hoje</h3>
+    </div>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+        <h4 class="font-bold text-slate-700">Últimas Atividades</h4>
+    </div>
+    <table class="w-full text-left text-sm">
+        <thead class="bg-slate-50 text-slate-500 uppercase text-xs">
+            <tr>
+                <th class="p-4">Data</th>
+                <th class="p-4">Cliente</th>
+                <th class="p-4">Produto</th>
+                <th class="p-4">Status</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+            <tr>
+                <td class="p-4">27/01 - 14:20</td>
+                <td class="p-4">João Silva (Cambuí)</td>
+                <td class="p-4 italic">Moura 60Ah</td>
+                <td class="p-4"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-[10px] font-bold">ENTREGUE</span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
