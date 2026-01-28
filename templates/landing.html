@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <script type="module" crossorigin src="/assets/index-DRzDpoOU.js"></script>
+    <title>ReVolt - Assinatura de Baterias Inteligentes</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        .btn-primary {
+            @apply bg-blue-700 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-800 transition-all duration-300 hover:shadow-lg hover:scale-105;
+        }
+        .btn-secondary {
+            @apply bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-all duration-300 hover:shadow-lg hover:scale-105;
+        }
+        .card-accent {
+            @apply bg-white rounded-lg shadow-md border-l-4 border-green-600 p-6 hover:shadow-lg transition-shadow;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+
+    <!-- Header/Navigation -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-200">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap w-8 h-8 text-blue-700" data-loc="client/src/pages/Home.tsx:160"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>
+                <span class="text-2xl font-bold text-blue-700">Re<span class="text-gray-800">Volt</span></span>
+            </div>
+            <div class="hidden md:flex gap-6 items-center">
+                <a href="#assinatura" class="text-gray-600 hover:text-blue-700 transition">Assinatura</a>
+                <a href="#reconditioning" class="text-gray-600 hover:text-blue-700 transition">Recondicionamento</a>
+                <a href="#produtos" class="text-gray-600 hover:text-blue-700 transition">Produtos</a>
+                <a href="#faq" class="text-gray-600 hover:text-blue-700 transition">FAQ</a>
+                <a href="https://wa.me/5519996737713" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+                    Contato
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden">
+        <div class="container mx-auto px-4 py-20 md:py-32">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in-up">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                        Nunca mais fique sem bateria no meio do caminho
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Compre baterias de qualidade ou assine um plano mensal para trocas anuais garantidas. Sem preocupações, sem surpresas desagradáveis.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center gap-2 bg-green-50 px-4 py-2 rounded-lg border border-green-200">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span class="text-green-700 font-medium">Garantia 12 meses</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-green-50 px-4 py-2 rounded-lg border border-green-200">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span class="text-green-700 font-medium">Instalação grátis</span>
+                        </div>
+                        <div class="flex items-center gap-2 bg-green-50 px-4 py-2 rounded-lg border border-green-200">
+                            <span class="text-green-600 font-bold">✓</span>
+                            <span class="text-green-700 font-medium">Diagnóstico grátis</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <img src="{{ url_for('static', filename='images/hero/battery-hero.jpg') }}" 
+                        alt="Bateria de carro com tecnologia" 
+                        class="rounded-2xl shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="bg-gradient-to-b from-white to-gray-50 py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto bg-white p-6 rounded-2xl shadow-lg border border-blue-100">
+                <h3 class="text-xl font-bold mb-4 text-gray-900">Encontre a bateria ideal para seu carro</h3>
+                <form action="/buscar" method="GET" class="flex flex-col md:flex-row gap-4">
+                    <input
+                        type="text"
+                        name="q"
+                        placeholder="Digite o modelo do seu carro (ex: Gol, Civic, Corolla...)"
+                        class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent"
+                        required
+                    />
+                    <button
+                        type="submit"
+                        class="btn-primary whitespace-nowrap"
+                    >
+                        Buscar Bateria
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-900">
+                O problema que ninguém quer enfrentar
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="">
+                <img src="{{ url_for('static', filename='images/problem/car-battery-emergency.jpg') }}" 
+                    alt="Bateria de carro com tecnologia" 
+                    class="rounded-2xl shadow-lg">
+            </div>
+                <div class="space-y-6">
+                    <div class="card-accent">
+                        <div class="flex gap-4">
+                            <div class="text-red-600 flex-shrink-0 mt-1 font-bold text-xl">⚠</div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">Bateria morta à noite</h4>
+                                <p class="text-gray-600">Você está em um lugar distante, escuro e perigoso. Seu carro não pega. Ninguém perto para ajudar.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-accent">
+                        <div class="flex gap-4">
+                            <div class="text-red-600 flex-shrink-0 mt-1 font-bold text-xl">⚠</div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">Chuva e frio extremo</h4>
+                                <p class="text-gray-600">Clima adverso reduz a performance da bateria. Justamente quando você mais precisa que o carro pegue.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-accent">
+                        <div class="flex gap-4">
+                            <div class="text-red-600 flex-shrink-0 mt-1 font-bold text-xl">⚠</div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-2">Custo imprevisto</h4>
+                                <p class="text-gray-600">Uma bateria nova custa entre R$ 500 e R$ 1.000. Você não estava preparado para esse gasto.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section - Subscription -->
+    <section id="assinatura" class="py-20 bg-blue-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-4 text-gray-900">
+                A solução: Assinatura ReVolt
+            </h2>
+            <p class="text-center text-gray-600 text-lg mb-16 max-w-2xl mx-auto">
+                Pague uma pequena mensalidade e nunca mais se preocupe com bateria morta. Trocas anuais garantidas, sem custos adicionais.
+            </p>
+            <div class="grid md:grid-cols-3 gap-8" id="plans-container">
+                <!-- Plans will be loaded here via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Reconditioning Section -->
+    <section id="reconditioning" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-6 text-gray-900">
+                        O que é recondicionamento de baterias?
+                    </h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Recondicionamento não é apenas "carregar uma bateria velha". É um processo científico que restaura a capacidade e performance da bateria para níveis próximos aos de uma bateria nova.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-blue-700 text-white font-bold">
+                                    1
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1">Limpeza Química</h4>
+                                <p class="text-gray-600 text-sm">Removemos resíduos internos que causam curto-circuito e reduzem a performance.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-blue-700 text-white font-bold">
+                                    2
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1">Troca do Eletrólito</h4>
+                                <p class="text-gray-600 text-sm">Ácido novo com densidade ajustada para o clima tropical brasileiro.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-lg bg-blue-700 text-white font-bold">
+                                    3
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-1">Ciclo de 48h</h4>
+                                <p class="text-gray-600 text-sm">Carga lenta e balanceamento de células para máxima durabilidade.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 p-6 bg-green-50 rounded-lg border-l-4 border-green-600">
+                        <p class="text-gray-700">
+                            <strong>Resultado:</strong> Uma bateria recondicionada funciona com 90% da performance de uma bateria nova, mas custa 60% menos.
+                        </p>
+                    </div>
+                </div>
+                <div class="">
+                    <img src="{{ url_for('static', filename='images/features/reconditioning-process.jpg') }}" 
+                        alt="Processo de recondicionamento" 
+                        class="rounded-2xl shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="produtos" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-4 text-gray-900">
+                Nossas Baterias em Destaque
+            </h2>
+            <p class="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
+                Todas testadas, com garantia e prontas para instalação
+            </p>
+            <div class="grid md:grid-cols-3 gap-8" id="products-container">
+                <!-- Products will be loaded here via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-900">
+                O que nossos clientes dizem
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+                    <div class="flex gap-1 mb-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed italic">
+                        "Meu carro não pegava mais à noite. Comprei uma bateria recondicionada da ReVolt e estou rodando há 8 meses sem problemas. Recomendo!"
+                    </p>
+                    <div class="border-t pt-4">
+                        <p class="font-bold text-gray-900">Carlos Silva</p>
+                        <p class="text-sm text-gray-600">Motorista de Uber</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+                    <div class="flex gap-1 mb-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed italic">
+                        "Assino o plano mensal e durmo tranquila. Não preciso me preocupar com bateria morta em situações críticas. Vale muito a pena!"
+                    </p>
+                    <div class="border-t pt-4">
+                        <p class="font-bold text-gray-900">Marina Costa</p>
+                        <p class="text-sm text-gray-600">Executiva</p>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+                    <div class="flex gap-1 mb-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed italic">
+                        "Já troquei bateria 3 vezes com a ReVolt. Qualidade garantida, preço justo e atendimento excelente. Virei cliente fiel."
+                    </p>
+                    <div class="border-t pt-4">
+                        <p class="font-bold text-gray-900">João Pereira</p>
+                        <p class="text-sm text-gray-600">Taxista</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-900">
+                Perguntas Frequentes
+            </h2>
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 flex justify-between items-center hover:bg-gray-50 transition" data-target="faq-1">
+                        <h3 class="font-bold text-gray-900 text-left">Qual é a diferença entre uma bateria recondicionada e uma nova?</h3>
+                        <span class="text-blue-700 transition-transform">▼</span>
+                    </button>
+                    <div id="faq-1" class="faq-content hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                        <p class="text-gray-700 leading-relaxed">Uma bateria recondicionada passa por um processo rigoroso de limpeza química, troca de eletrólito e ciclos de carga de 48h. Ela funciona com 90% da performance de uma bateria nova, mas custa muito menos. É uma excelente opção para quem quer economizar sem sacrificar a qualidade.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 flex justify-between items-center hover:bg-gray-50 transition" data-target="faq-2">
+                        <h3 class="font-bold text-gray-900 text-left">Como funciona a assinatura mensal?</h3>
+                        <span class="text-blue-700 transition-transform">▼</span>
+                    </button>
+                    <div id="faq-2" class="faq-content hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                        <p class="text-gray-700 leading-relaxed">Você paga uma mensalidade fixa e tem direito a uma troca de bateria por ano, sem custos adicionais. Se sua bateria falhar antes do período de troca, nós substituímos gratuitamente. É como um seguro que garante que seu carro sempre terá uma bateria em perfeito estado.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 flex justify-between items-center hover:bg-gray-50 transition" data-target="faq-3">
+                        <h3 class="font-bold text-gray-900 text-left">Posso cancelar a assinatura a qualquer momento?</h3>
+                        <span class="text-blue-700 transition-transform">▼</span>
+                    </button>
+                    <div id="faq-3" class="faq-content hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                        <p class="text-gray-700 leading-relaxed">Sim! Você pode cancelar sem multa ou taxa de cancelamento. Não há contrato de longa duração. Queremos que você fique conosco porque vê valor, não porque está preso.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 flex justify-between items-center hover:bg-gray-50 transition" data-target="faq-4">
+                        <h3 class="font-bold text-gray-900 text-left">Qual é a garantia das baterias recondicionadas?</h3>
+                        <span class="text-blue-700 transition-transform">▼</span>
+                    </button>
+                    <div id="faq-4" class="faq-content hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                        <p class="text-gray-700 leading-relaxed">Todas as nossas baterias recondicionadas têm garantia de 12 meses. Se apresentar problemas dentro desse período, nós substituímos gratuitamente. Além disso, se você assinar nosso plano, a garantia é estendida indefinidamente enquanto mantiver a assinatura.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 flex justify-between items-center hover:bg-gray-50 transition" data-target="faq-5">
+                        <h3 class="font-bold text-gray-900 text-left">Como faço para saber qual bateria é compatível com meu carro?</h3>
+                        <span class="text-blue-700 transition-transform">▼</span>
+                    </button>
+                    <div id="faq-5" class="faq-content hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                        <p class="text-gray-700 leading-relaxed">Use nossa ferramenta de busca no topo da página. Digite o modelo do seu carro e mostraremos todas as baterias compatíveis, com preços e especificações. Você também pode nos contatar via WhatsApp para uma recomendação personalizada.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 flex justify-between items-center hover:bg-gray-50 transition" data-target="faq-6">
+                        <h3 class="font-bold text-gray-900 text-left">Vocês fazem instalação?</h3>
+                        <span class="text-blue-700 transition-transform">▼</span>
+                    </button>
+                    <div id="faq-6" class="faq-content hidden px-6 py-4 bg-gray-50 border-t border-gray-200">
+                        <p class="text-gray-700 leading-relaxed">Sim! Oferecemos serviço de instalação profissional. Você pode agendar um horário conveniente e nossos técnicos instalarão a bateria no seu carro. O serviço é rápido (cerca de 30 minutos) e realizado com precisão.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-blue-700 to-blue-900 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-6">
+                Pronto para nunca mais se preocupar com bateria?
+            </h2>
+            <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                Assine nosso plano mensal ou compre uma bateria de qualidade hoje mesmo. Seu carro (e sua paz de espírito) vão agradecer.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button class="bg-white text-blue-700 px-8 py-4 rounded-lg font-bold hover:bg-blue-50 transition-all hover:scale-105">
+                    Assinar Agora
+                </button>
+                <a
+                    href="https://wa.me/5511999999999"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="bg-green-500 text-white px-8 py-4 rounded-lg font-bold hover:bg-green-600 transition-all hover:scale-105 flex items-center justify-center gap-2"
+                >
+                    💬 Fale com a Gente
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-white font-bold mb-4">ReVolt</h3>
+                    <p class="text-sm">Baterias inteligentes para seu carro.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Produto</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Baterias</a></li>
+                        <li><a href="#assinatura" class="hover:text-white transition">Assinatura</a></li>
+                        <li><a href="#reconditioning" class="hover:text-white transition">Recondicionamento</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Empresa</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Sobre</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contato</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Privacidade</a></li>
+                        <li><a href="#" class="hover:text-white transition">Termos</a></li>
+                        <li><a href="#" class="hover:text-white transition">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-sm">
+                <p>&copy; 2026 ReVolt. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const content = document.getElementById(targetId);
+                const arrow = this.querySelector('span');
+                
+                // Close other FAQs
+                document.querySelectorAll('.faq-content').forEach(el => {
+                    if (el.id !== targetId) {
+                        el.classList.add('hidden');
+                    }
+                });
+                document.querySelectorAll('.faq-toggle span').forEach(el => {
+                    if (el !== arrow) {
+                        el.style.transform = 'rotate(0deg)';
+                    }
+                });
+                
+                // Toggle current
+                content.classList.toggle('hidden');
+                arrow.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+            });
+        });
+
+        // Load plans from Flask API
+        async function loadPlans() {
+            try {
+                const response = await fetch('/api/plans');
+                const plans = await response.json();
+                const container = document.getElementById('plans-container');
+                
+                container.innerHTML = plans.map((plan, idx) => `
+                    <div class="rounded-2xl p-8 transition-all duration-300 ${
+                        idx === 1 ? 'bg-blue-700 text-white shadow-2xl transform scale-105' : 'bg-white border-2 border-gray-200 hover:border-blue-700'
+                    }">
+                        <h3 class="text-2xl font-bold mb-2 ${idx === 1 ? 'text-white' : 'text-gray-900'}">
+                            ${plan.name}
+                        </h3>
+                        <div class="mb-8">
+                            <span class="text-4xl font-bold ${idx === 1 ? 'text-white' : 'text-blue-700'}">
+                                R$ ${plan.price.toFixed(2)}
+                            </span>
+                            <span class="${idx === 1 ? 'text-blue-100' : 'text-gray-600'}">
+                                /mês
+                            </span>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            ${plan.benefits.split(';').map(benefit => `
+                                <li class="flex items-start gap-3">
+                                    <span class="${idx === 1 ? 'text-green-300' : 'text-green-600'}">✓</span>
+                                    <span class="${idx === 1 ? 'text-blue-50' : 'text-gray-700'}">
+                                        ${benefit.trim()}
+                                    </span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                        <button class="w-full py-3 rounded-lg font-bold transition-all ${
+                            idx === 1
+                                ? 'bg-white text-blue-700 hover:bg-blue-50'
+                                : 'bg-blue-700 text-white hover:bg-blue-800'
+                        }">
+                            ${plan.name === 'Profissional' ? 'Solicitar Orçamento' : 'Assinar Agora'}
+                        </button>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Erro ao carregar planos:', error);
+            }
+        }
+
+         // Load products from Flask API
+        async function loadProducts() {
+            try {
+                const response = await fetch('/api/products');
+                const products = await response.json();
+                const container = document.getElementById('products-container');
+                
+                container.innerHTML = products.map(product => `
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow">
+                        <div class="w-full h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center overflow-hidden">
+                            <img src="/static/uploads/products/${product.image_url}" 
+                                 alt="${product.brand}" 
+                                 class="h-full w-full object-cover"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                            <span class="text-4xl hidden">🔋</span>
+                        </div>
+                        <div class="p-6">
+                            <span class="inline-block ${product.is_reconditioned ? 'bg-blue-100 text-blue-700' : 'bg-green-100 text-green-700'} text-xs font-bold px-3 py-1 rounded-full mb-3">
+                                ${product.is_reconditioned ? 'Recondicionada' : 'Nova'}
+                            </span>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">${product.brand} ${product.amps}Ah</h3>
+                            <p class="text-sm text-gray-600 mb-4">
+                                Compatível com: <span class="font-medium">${product.compatible_cars.map(c => c.model).join(', ') || 'Diversos modelos'}</span>
+                            </p>
+                            <div class="mb-6">
+                                ${product.old_price ? `<p class="text-gray-400 line-through text-sm">R$ ${product.old_price.toFixed(2)}</p>` : ''}
+                                <p class="text-3xl font-bold text-blue-700">R$ ${product.price.toFixed(2)}</p>
+                            </div>
+                            <a href="/produto/${product.id}" class="w-full btn-primary text-center block">
+                                Ver Detalhes
+                            </a>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Erro ao carregar produtos:', error);
+            }
+        }
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPlans();
+            loadProducts();
+        });
+    </script>
+</body>
+</html>

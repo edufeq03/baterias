@@ -4,6 +4,7 @@ from database import db
 from config import DevelopmentConfig
 from routes.main import main_bp
 from routes.admin import admin_bp
+from routes.landing import landing_bp  # ← ADICIONE
 import os
 from werkzeug.utils import secure_filename
 
@@ -23,6 +24,7 @@ db.init_app(app)
 # Registra os Blueprints (Pastas de rotas)
 app.register_blueprint(main_bp)
 app.register_blueprint(admin_bp)
+app.register_blueprint(landing_bp)  # ← AQUI
 
 with app.app_context():
     import models

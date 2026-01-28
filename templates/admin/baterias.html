@@ -25,8 +25,14 @@
         <div class="lg:col-span-4 flex justify-end gap-4">
              <input type="number" name="old_price" placeholder="Preço Novo (R$)" class="p-2 border rounded-lg w-32">
              <input type="number" name="stock_quantity" placeholder="Estoque" class="p-2 border rounded-lg w-24">
+             <div class="flex items-center gap-2 mb-2">
+            <input type="checkbox" name="is_reconditioned" id="is_reconditioned" checked class="w-4 h-4 text-blue-600">
+            <label for="is_reconditioned" class="text-sm font-medium text-slate-700">Esta bateria é Recondicionada?</label>
+        </div>
+        <p class="text-xs text-slate-400 mb-4">*Se desmarcar, o site exibirá como bateria NOVA.</p>
              <button type="submit" class="bg-blue-600 text-white px-8 py-2 rounded-lg font-bold hover:bg-blue-700 transition">Salvar</button>
         </div>
+        
     </form>
 </div>
 
