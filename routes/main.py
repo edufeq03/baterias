@@ -51,4 +51,4 @@ def shop():
         query = query.filter(Battery.amps == int(amps))
         
     products = query.order_by(Battery.price.asc()).all()
-    return render_template('shop.html', products=products)
+    return render_template('shop/explorer.html', products=products)

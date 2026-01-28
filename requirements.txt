@@ -1,9 +1,12 @@
 # Web Framework
 Flask==3.0.0
+flask-login
+werkzeug
 
 # Banco de Dados (PostgreSQL)
 Flask-SQLAlchemy
 psycopg2-binary
+
 # Pagamentos
 stripe==7.11.0
 
