@@ -1,32 +1,28 @@
-# Utiliza uma imagem leve do Python
-FROM python:3.11-slim
+# Utiliza uma imagem ainda mais leve para economizar recursos da VPS
+FROM python:3.11-slim-bookworm
 
-# Evita que o Python gere arquivos .pyc e permite log em tempo real
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# Sintaxe moderna (key=value) para evitar os avisos (Warnings)
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# Define o diretório de trabalho dentro do container
 WORKDIR /app
 
-# Instala dependências do sistema necessárias para o banco de dados e compilação
+# Instala apenas o essencial e limpa o cache imediatamente para reduzir o uso de disco/RAM
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libpq-dev \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copia apenas o arquivo de dependências primeiro (otimiza o cache do Docker)
+# Copia e instala dependências primeiro
 COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir gunicorn
 
-# Instala as dependências do Python e o Gunicorn (servidor de produção)
-RUN pip install --no-cache-dir -r requirements.txt
-RUN pip install gunicorn
-
-# Copia o restante dos arquivos do projeto
 COPY . .
 
-# Expõe a porta que o Flask/Gunicorn irá rodar
 EXPOSE 5000
 
-# Comando para iniciar a aplicação com Gunicorn
-# 'app:app' refere-se ao arquivo app.py e à variável app = Flask(__name__)
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "3", "app:app"]
+# Gunicorn com menos workers para evitar o erro 'Killed' em VPS pequenas (1GB RAM)
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--threads", "4", "--timeout", "60", "app:app"]
