@@ -1,7 +1,7 @@
 # Utiliza uma imagem ainda mais leve para economizar recursos da VPS
 FROM python:3.11-slim-bookworm
 
-# Sintaxe moderna (key=value) para evitar os avisos (Warnings)
+# Sintaxe moderna (key=value) para evitar os aviso
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
