@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>{{ product.brand }} {{ product.amps }}Ah | ReVolt</title>
-</head>
-<body class="bg-slate-50">
+{% extends "base.html" %}
+
+{% block title %}Sua Loja de Baterias | ReVolt{% endblock %}
+
+{% block content %}
     <div class="container mx-auto px-4 py-8 max-w-4xl">
         <a href="/" class="text-blue-600 font-bold mb-6 inline-block">← Voltar para a Loja</a>
         
@@ -65,5 +61,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}
