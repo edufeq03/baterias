@@ -34,3 +34,21 @@ def product_detail(product_id):
 def landing():
     """Serve a nova landing page com dados do banco"""
     return render_template('landing.html')
+
+@main_bp.route('/loja')
+def shop():
+    condicao = request.args.get('condicao')
+    amps = request.args.get('amps')
+    
+    query = Battery.query
+    
+    if condicao == 'nova':
+        query = query.filter(Battery.is_reconditioned == False)
+    elif condicao == 'recondicionada':
+        query = query.filter(Battery.is_reconditioned == True)
+        
+    if amps:
+        query = query.filter(Battery.amps == int(amps))
+        
+    products = query.order_by(Battery.price.asc()).all()
+    return render_template('shop.html', products=products)

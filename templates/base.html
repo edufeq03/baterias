@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}ReVolt | Baterias Inteligentes{% endblock %}</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        poppins: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .bg-gradient-soft {
+            background: radial-gradient(circle at top right, #f8fafc 0%, #ffffff 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="bg-white text-slate-900 font-sans min-h-screen flex flex-col">
+
+    <header class="fixed top-0 w-full z-50 border-b border-slate-100 glass-nav">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2 group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap w-8 h-8 text-blue-700" data-loc="client/src/pages/Home.tsx:160"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>
+                <h1 class="text-2xl font-bold tracking-tight font-poppins text-slate-900">
+                    Re<span class="text-blue-600">Volt</span>
+                </h1>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="/loja" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition">Explorar Loja</a>
+                <a href="/#clube" class="text-sm font-medium text-slate-600 hover:text-blue-600 transition">Clube ReVolt</a>
+                <a href="https://wa.me/5519999999999" class="bg-blue-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-blue-700 transition shadow-lg shadow-blue-200">
+                    Falar com Especialista
+                </a>
+            </div>
+
+            <div class="md:hidden">
+                <a href="/loja" class="p-2 text-slate-600 text-sm font-bold uppercase tracking-tighter">Loja</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-slate-50 py-12 border-t border-slate-100">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+                <div>
+                    <div class="flex items-center gap-2 mb-2 justify-center md:justify-start">
+                        <div class="w-6 h-6 bg-slate-300 rounded flex items-center justify-center">
+                            <span class="text-white font-bold text-xs">R</span>
+                        </div>
+                        <span class="font-bold text-slate-900 font-poppins">ReVolt Marketplace</span>
+                    </div>
+                    <p class="text-slate-400 text-xs">A maior rede de baterias de Campinas e região.</p>
+                </div>
+                
+                <div class="flex gap-8">
+                    <a href="/admin" class="text-slate-400 hover:text-blue-600 text-[10px] font-bold uppercase tracking-widest transition">Admin</a>
+                    <a href="#" class="text-slate-400 hover:text-blue-600 text-[10px] font-bold uppercase tracking-widest transition">Termos</a>
+                </div>
+
+                <p class="text-slate-400 text-[10px] uppercase font-bold tracking-widest">
+                    © 2026 ReVolt Inc.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
